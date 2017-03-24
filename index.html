@@ -27,7 +27,7 @@
         margin-top: -10px;
 
       }
-      #map { height: 80%;  width: 90%; margin-left:5%;}
+      #map { height: 90%; width: 70%; float: left}
 
       .content{
           width: 530px;
@@ -88,7 +88,7 @@
 
 
   <body>
-    <div id="head" style="height: 90px; padding-left: 5%; display: block;">
+    <div id="head" style="height: 90px; padding-left: 20%; display: block;">
         <div id="h-left" style=" width: 50%; float: left">
             <span style="padding-top: 10px; letter-spacing:10px; display:block; width: 100%; color: #c70000; font-size: 80px;  -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: #fff81d;">
                 CONTAMINAÇÃO
@@ -113,7 +113,18 @@
         </div>
 
     </div>
-    <div id="map"></div>
+
+    <div style="height: 80%;  width: 100%;">
+        <div id="legend" style="float: left; padding-top: 20px; height: 100%; width: 300px;  color: #fff;">
+            <div><span style="margin-left:10px; display: block; width: 70px; height: 20px; background-color: yellow; float: left; margin-right: 10px"></span> VALOR QUE NÃO EXCEDE O <b>VPR</b></div>
+            <br>
+            <div><span style="margin-left:10px; display: block; width: 70px; height: 20px; background-color: orange; float: left; margin-right: 10px"></span> VALOR QUE EXCEDE O <b>VPR</b></div>
+            <br>
+            <div><span style="margin-left:10px; display: block; width: 70px; height: 20px; background-color: red; float: left; margin-right: 10px"></span> VALOR QUE EXCEDE O <b>VIR</b></div>
+        </div>
+        <div id="map"></div>
+    </div>
+
     <div id="foot" style="color: #eee; text-align: center">
         Essa é uma versão web do Mapa - Contaminação do Solo por Elementos Químicos em Santo Amaro da Purificação <a target="_blank" href="http://www.sat.ufba.br/site/main.asp?view=galeria&id=47">(CARVALHO et al., 2010)</a>
     </div>
@@ -127,8 +138,10 @@ function initMap() {
     center: {lat: -12.545458, lng: -38.718223},
     zoom: 19
   });
-  
-   var contentString = '<div class="content">'+
+
+    
+    /* Local 1 */
+   var contentString1 = '<div class="content">'+
       '<div class="title">Local 1</div>'+
 	  '<div class="tables">'+
            '<div class="head">' +
@@ -145,8 +158,8 @@ function initMap() {
            '</div>'+
       '</div></div>';
 
-  var infowindow = new google.maps.InfoWindow({
-    content: contentString
+  var infowindow1 = new google.maps.InfoWindow({
+    content: contentString1
   });
   
   
@@ -158,16 +171,45 @@ function initMap() {
   
   marker1.setIcon("icons/icon1.png");
   marker1.addListener('click', function() {
-    infowindow.open(map, marker1);
+    infowindow1.open(map, marker1);
   });
-  
-  var marker2 = new google.maps.Marker({
+
+
+  /* Local 2 */
+
+  var contentString2 = '<div class="content">'+
+            '<div class="title">Local 2</div>'+
+            '<div class="tables">'+
+            '<div class="head">' +
+            '<div class="itens"> CHUMBO </div><div class="itens"> CÁDMIO </div><div class="itens"> NÍQUEL </div>' +
+            '<div class="itens"> ZINCO </div><div class="itens"> ARSÉNIO </div><div class="itens"> ANTIMÔNIO </div>' +
+            '</div>'+
+            '<div class="contents">' +
+            '<div class="itens"><div class="o"></div></div> ' +
+            '<div class="itens"><div class="y"></div></div>' +
+            '<div class="itens"><div class="y"></div></div>' +
+            '<div class="itens"><div class="y"></div></div>' +
+            '<div class="itens"><div class="y"></div></div>' +
+            '<div class="itens"><div class="y"></div></div>' +
+            '</div>'+
+            '</div></div>';
+
+  var infowindow2 = new google.maps.InfoWindow({
+        content: contentString2
+  });
+
+
+    var marker2 = new google.maps.Marker({
     position: {lat:-12.545752, lng:  -38.717773},
     map: map,
     title: 'Local 2',
   });
   
-  marker2.setIcon("icons/icon2.png")
+  marker2.setIcon("icons/icon2.png");
+
+  marker2.addListener('click', function() {
+        infowindow2.open(map, marker2);
+  });
   
 
 }
